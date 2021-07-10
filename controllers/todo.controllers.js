@@ -1,6 +1,7 @@
 const Todo = require("../models/todo.models");
 
 const createTodo = async (req, res) => {
+  console.log(req);
   const newTodo = new Todo({
     name: req.body.name,
   });

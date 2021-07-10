@@ -7,9 +7,7 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
-mongoose.connect(
-  "mongodb+srv://test:qEcASBbVNyAKvJKb@cluster0.lfyij.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-);
+mongoose.connect("mongodb://localhost:27017/todo-simple");
 mongoose.connection.on("connected", () => {
   console.log("DB connected");
 });
@@ -18,6 +16,7 @@ mongoose.connection.on("error", (err) => {
 });
 //import routes
 const todoRoutes = require("./routes/todo.routes");
+const authRoutes = require("./routes/auth.routes");
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,6 +25,7 @@ app.get("/", (req, res) => {
   return res.json({ msg: "hello world" });
 });
 app.use("/todo", todoRoutes);
+app.use("/auth", authRoutes);
 //server listening
 const port = 8000;
 app.listen(port, () => {
